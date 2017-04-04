@@ -43,9 +43,13 @@ rule hello_world {
   pre{
     id = event:attr("id").defaultsTo("_0")
     name = name(id)
+    visits = ent:name{[id,"visits"]}
   }
   send_directive("say") with
     something = "Hello " + name
+  fired {
+    ent:name{[id,"visits"]} := visits + 1
+  }
 }
 
 rule store_name {
