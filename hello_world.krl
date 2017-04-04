@@ -22,6 +22,7 @@ __testing = { "queries": [ { "name": "hello", "args": [ "obj" ] },
     }
   }
 
+
 rule hello_world {
   select when echo hello
   pre{
