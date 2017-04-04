@@ -4,11 +4,13 @@ ruleset echo {
     description <<Echo Server>>
     author "Sean Miller"
     logging on
-    shares hello, __testing
+    shares __testing
   }
 
   global {
-
+  __testing = { "events": [ { "domain": "echo", "type": "hello" },
+                            { "domain": "echo", "type": "message",
+                              "attrs": [ "input" ] } ] }
   }
 
 
