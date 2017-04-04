@@ -21,9 +21,9 @@ rule hello is active {
 }
    
 rule message is active {
-  select when echo message input re#(.*)# setting(m);
+  select when echo message input re#(.*)# setting(input);
   send_directive("say") with
-    something = m
+    something = input
 }
   
 }
