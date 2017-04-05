@@ -13,7 +13,7 @@ ruleset track_trips {
 	}
 
 	rule process_trip is active{
-	  select when echo message mileage re#(.*)# setting(mileage);
+	  select when track_trips message mileage re#(.*)# setting(mileage);
 	  send_directive("trip") with
 	    trip_length = mileage
 	}
