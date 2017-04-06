@@ -17,6 +17,7 @@ ruleset track_trips3 {
 	  send_directive("trip") with
 	    trip_length = mileage
 	  always{
+	      ent:trips := ent:trips.defaultsTo([]).union([mileage]);
 		  raise explicit event "trip_processed"
 		  	attributes event:attrs()
 	  }
