@@ -1,7 +1,7 @@
 var args = require("minimist")(process.argv.slice(2));
  
 var event_type = args.e || "new_trip";
-var message = args.m || "";
+var message = args.m || "2000miles";
  
 var request = require("request");
 // must be an eci to a pico with the echo_server ruleset or similar installed

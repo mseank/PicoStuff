@@ -13,7 +13,7 @@ ruleset track_trips3 {
 	}
 
 	rule process_trip is active{
-	  select when car new_trip input re#(.*)# setting(mileage);
+	  select when car2 new_trip input re#(.*)# setting(mileage);
 	  send_directive("trip") with
 	    trip_length = mileage
 	  always{
