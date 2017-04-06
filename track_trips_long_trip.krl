@@ -39,4 +39,10 @@ ruleset track_trips_long_trip {
 		}
 
 	}
+
+	rule test is active {
+		select when explicit found_long_trip input re#(.*)# setting(mileage);
+		send_directive("trip")
+			with trip_length = "this is a test"
+	}
 }
