@@ -30,7 +30,7 @@ Store trips
 		select when explicit trip_processed
 		pre {
 				mileage = event:attr("mileage").klog("our passed in mileage: ")
-				timestamp = event:attr("timestamp").klog("our passed in timestamp: ")
+				timestamp = time:now()
 		} 
 		always{
     		ent:trips{[timestamp,"trips","mileage"]} := mileage
@@ -42,6 +42,7 @@ Store trips
 		select when explicit found_long_trip
 		pre{
 				mileage = event:attr("mileage").klog("our passed in mileage: ")
+				timestamp = time:now()
 		}
 		always{
 			ent:long_trips{[timestamp,"trips","mileage"]} := mileage
