@@ -32,7 +32,6 @@ Store trips
 				mileage = event:attr("mileage").klog("our passed in mileage: ")
 		} 
 		always{
-			ent:trips := ent:name.defaultsTo(clear_trips,"initialization was needed");
     		ent:trips{[timestamp,"trips","mileage"]} := mileage
 		}
 	}
