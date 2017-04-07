@@ -10,8 +10,8 @@ Store trips
 	}
 
 	global {
-		clear_trips = { "_0": { "trip": { "mileage": "", "timestamp": ""} } }
-		clear_long = { "_0": { "trip": { "mileage": "", "timestamp": ""} } }
+		clear_trips = { "_0": { "trip": { "mileage": ""} } }
+		clear_long = { "_0": { "trip": { "mileage": ""} } }
 
 		trips = function() {
 			ent:trips
@@ -30,10 +30,11 @@ Store trips
 		select when explicit trip_processed
 		pre {
 				mileage = event:attr("mileage").klog("our passed in mileage: ")
-				timestamp = event:attr("timestamp").klog("our passed in timestmap: ")
+				timestamp = event:attr("timestamp").klog("our passed in timestamp: ")
 		} 
 		always{
     		ent:trips{[timestamp,"trips","mileage"]} := mileage
+
 		}
 	}
 
@@ -43,7 +44,7 @@ Store trips
 				mileage = event:attr("mileage").klog("our passed in mileage: ")
 		}
 		always{
-			ent:long_trips := ent:long_trips.defaultsTo([]).union([mileage]).union([timestamp])
+			ent:long_trips{[timestamp,"trips","mileage"]} := mileage
 		}
 	}
 
