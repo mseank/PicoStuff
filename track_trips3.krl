@@ -16,6 +16,7 @@ ruleset track_trips3 {
 	  select when car2 new_trip input re#(.*)# setting(mileage);
 	  send_directive("trip") with
 	    trip_length = mileage
+	    timestamp = time:new()
 	  always{
 	      ent:trips := ent:trips.defaultsTo([]).union([mileage]);
 		  raise explicit event "trip_processed"
