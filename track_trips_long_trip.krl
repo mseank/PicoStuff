@@ -18,19 +18,22 @@ ruleset track_trips_long_trip {
 
 	rule process_trip is active{
 	  select when longcar new_trip input re#(.*)# setting(mileage);
+	  pre{
+	  	timestamp = time:now()
+	  }
 	  send_directive("trip") with
-	    trip_length = mileage
+	    ent:trip_length := mileage
 	  always{
 	      ent:trips := ent:trips.defaultsTo([]).union([mileage]).union([timestamp]);
 		  raise explicit event "trip_processed"
-		  	attributes {"trip_length":mileage}
+		  	attributes event:attrs()
 	  }
 	}
 
 	rule find_long_trips is active{
 		select when explicit trip_processed;
 		pre{
-			mileage = event:attr("trip_length")
+			mileage = event:attr("mileage").klog("our passed in mileage: ")
 			timestamp = event:attr("timestamp")
 			lessMileage = mileage.as("Number") < long_trip
 		}
