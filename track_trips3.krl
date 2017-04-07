@@ -18,7 +18,7 @@ ruleset track_trips3 {
 	    trip_length = mileage
 	    timestamp = time:new()
 	  always{
-	      ent:trips := ent:trips.defaultsTo([]).union([mileage]);
+	      ent:trips := ent:trips.defaultsTo([]).union([mileage]).union([timestamp]);
 		  raise explicit event "trip_processed"
 		  	attributes event:attrs()
 	  }
