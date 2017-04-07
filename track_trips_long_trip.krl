@@ -13,6 +13,7 @@ ruleset track_trips_long_trip {
                               "attrs": [ "mileage" ] } ] }
 
     long_trip = 2500
+    current_trip = 0
 	}
 
 	rule process_trip is active{
@@ -29,7 +30,7 @@ ruleset track_trips_long_trip {
 	rule find_long_trips is active{
 		select when explicit trip_processed;
 		pre{
-			mileage = event:attr("mileage")
+			mileage = event:attr("trip_length")
 			timestamp = event:attr("timestamp")
 			lessMileage = mileage.as("Number") < long_trip
 		}
