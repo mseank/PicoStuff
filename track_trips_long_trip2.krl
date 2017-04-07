@@ -19,7 +19,7 @@ ruleset track_trips_long_trip {
 	rule process_trip is active{
 	  select when longcar new_trip input re#(.*)# setting(mileage);
 	  pre{
-	  	timestamp = time:now().as("str")
+	  	event:attr("timestamp") = time:now()
 	  }
 	  send_directive("trip") with
 	    trip_length = mileage
