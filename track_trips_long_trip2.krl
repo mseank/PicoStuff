@@ -34,7 +34,7 @@ ruleset track_trips_long_trip {
 		select when explicit trip_processed;
 		pre{
 			mileage = event:attr("mileage").klog("our passed in mileage: ")
-			timestamp = event:attr("timestamp")
+			timestamp = event:attr("timestamp").klog("our passed in timestamp: ")
 			lessMileage = mileage.as("Number") < long_trip
 		}
 		if lessMileage then
