@@ -22,7 +22,7 @@ ruleset track_trips_long_trip {
 	  	timestamp = time:now()
 	  }
 	  send_directive("trip") with
-	    ent:trip_length := mileage
+	    trip_length = mileage
 	  always{
 	      ent:trips := ent:trips.defaultsTo([]).union([mileage]).union([timestamp]);
 		  raise explicit event "trip_processed"
