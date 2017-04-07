@@ -30,7 +30,6 @@ Store trips
 		select when explicit trip_processed
 		pre {
 				mileage = event:attr("mileage").klog("our passed in mileage: ")
-				timestamp = time:new()
 		} 
 		always{
 			ent:trips := ent:trips.defaultsTo([]).union([mileage]).union([timestamp])
@@ -41,7 +40,6 @@ Store trips
 		select when explicit found_long_trip
 		pre{
 				mileage = event:attr("mileage").klog("our passed in mileage: ")
-				timestamp = time:new()
 		}
 		always{
 			ent:long_trips := ent:long_trips.defaultsTo([]).union([mileage]).union([timestamp])
