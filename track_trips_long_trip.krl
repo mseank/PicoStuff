@@ -27,7 +27,7 @@ ruleset track_trips_long_trip {
 	}
 
 	rule find_long_trips is active{
-		select when explicit trip_processed input re#(.*)# setting(mileage);
+		select when explicit trip_processed;
 		pre{
 			lessMileage = mileage.as("Number") < long_trip
 		}
