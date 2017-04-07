@@ -23,7 +23,7 @@ ruleset track_trips_long_trip {
 	  always{
 	      ent:trips := ent:trips.defaultsTo([]).union([mileage]).union([timestamp]);
 		  raise explicit event "trip_processed"
-		  	attributes event:attrs()
+		  	attributes {"trip_length":trip_length}
 	  }
 	}
 
