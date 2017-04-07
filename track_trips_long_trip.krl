@@ -29,6 +29,8 @@ ruleset track_trips_long_trip {
 	rule find_long_trips is active{
 		select when explicit trip_processed;
 		pre{
+			mileage = event:attr("mileage")
+			timestamp = event:attr("timestamp")
 			lessMileage = mileage.as("Number") < long_trip
 		}
 		if lessMileage then
