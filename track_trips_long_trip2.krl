@@ -9,7 +9,7 @@ ruleset track_trips_long_trip {
 	}
 
 	global {
-	__testing = { "events": [{ "domain": "car", "type": "new_trip",
+	__testing = { "events": [{ "domain": "longcar", "type": "new_trip",
                               "attrs": [ "mileage" ] } ] }
 
     long_trip = 2500
@@ -19,12 +19,12 @@ ruleset track_trips_long_trip {
 	rule process_trip is active{
 	  select when longcar new_trip input re#(.*)# setting(mileage);
 	  pre{
-	  	event:attr("timestamp") = time:now()
+	  	
 	  }
 	  send_directive("trip") with
 	    trip_length = mileage
 	  always{
-	      ent:trips := ent:trips.defaultsTo([]).union([mileage]).union([timestamp]);
+	      ent:trips := ent:trips.defaultsTo([]).union([mileage]).union([time:now()]);
 		  raise explicit event "trip_processed"
 		  	attributes event:attrs()
 	  }
