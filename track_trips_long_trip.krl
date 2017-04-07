@@ -4,6 +4,7 @@ ruleset track_trips_long_trip {
 	    description <<Tracks trips>>
 	    author "Sean Miller"
 	    logging on
+	    use module trip_store
 	    shares __testing
 	}
 
@@ -18,8 +19,9 @@ ruleset track_trips_long_trip {
 	  select when longcar new_trip input re#(.*)# setting(mileage);
 	  send_directive("trip") with
 	    trip_length = mileage
+	    timestamp = time:new()
 	  always{
-	      ent:trips := ent:trips.defaultsTo([]).union([mileage]);
+	      ent:trips := ent:trips.defaultsTo([]).union([mileage]).union([timestamp]);
 		  raise explicit event "trip_processed"
 		  	attributes event:attrs()
 	  }
