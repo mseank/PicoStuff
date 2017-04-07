@@ -43,6 +43,7 @@ ruleset track_trips_long_trip {
 		fired{
 		} else {
 			raise explicit event "found_long_trip"
+		  		attributes event:attrs()
 		}
 
 	}
